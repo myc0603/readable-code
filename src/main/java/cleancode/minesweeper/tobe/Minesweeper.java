@@ -3,7 +3,6 @@ package cleancode.minesweeper.tobe;
 import cleancode.minesweeper.tobe.game.GameInitializable;
 import cleancode.minesweeper.tobe.game.GameRunnable;
 import cleancode.minesweeper.tobe.gamelevel.GameLevel;
-import cleancode.minesweeper.tobe.gamelevel.Level;
 import cleancode.minesweeper.tobe.io.InputHandler;
 import cleancode.minesweeper.tobe.io.OutputHandler;
 
@@ -15,14 +14,9 @@ public class Minesweeper implements GameInitializable, GameRunnable {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
     private int gameStatus = 0; // 0: 게임 중, 1: 승리, -1: 패배
+//    private GameStatus gameStatus = GameStatus.NOT_DETERMINED;
 
     public Minesweeper(GameLevel gameLevel, InputHandler inputHandler, OutputHandler outputHandler) {
-        this.gameBoard = new GameBoard(gameLevel);
-        this.inputHandler = inputHandler;
-        this.outputHandler = outputHandler;
-    }
-
-    public Minesweeper(Level gameLevel, InputHandler inputHandler, OutputHandler outputHandler) {
         this.gameBoard = new GameBoard(gameLevel);
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
