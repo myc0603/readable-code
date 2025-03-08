@@ -1,10 +1,30 @@
 package cleancode.minesweeper.tobe.gamelevel;
 
-public interface GameLevel {
+public enum GameLevel {
+    ADVANCED(20, 24, 99),
+    MIDDLE(14, 18, 40),
+    BEGINNER(8, 10, 10),
+    VERY_BEGINNER(4, 5, 2);
 
-    int getRowSize();
+    private final int rowSize;
+    private final int colSize;
+    private final int landMineCount;
 
-    int getColSize();
+    GameLevel(int rowSize, int colSize, int landMineCount) {
+        this.rowSize = rowSize;
+        this.colSize = colSize;
+        this.landMineCount = landMineCount;
+    }
 
-    int getLandMineCount();
+    public int getRowSize() {
+        return rowSize;
+    }
+
+    public int getColSize() {
+        return colSize;
+    }
+
+    public int getLandMineCount() {
+        return landMineCount;
+    }
 }
