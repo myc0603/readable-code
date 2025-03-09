@@ -124,8 +124,9 @@ public class GameBoard {
         board[position.getRowIndex()][position.getColIndex()] = cell;
     }
 
-    public String getSign(CellPosition cellPosition) {
-        return findCell(cellPosition).getSign();
+    public CellSnapshot getSnapshot(CellPosition cellPosition) {
+        Cell cell = findCell(cellPosition);
+        return cell.getSnapshot();
     }
 
     private Cell findCell(CellPosition cellPosition) {
