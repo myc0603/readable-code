@@ -2,6 +2,7 @@ package cleancode.minesweeper.tobe.io;
 
 import cleancode.minesweeper.tobe.GameBoard;
 import cleancode.minesweeper.tobe.GameException;
+import cleancode.minesweeper.tobe.GameStatus;
 
 public interface OutputHandler {
 
@@ -9,7 +10,7 @@ public interface OutputHandler {
 
     void showBoard(GameBoard board);
 
-    void showGameEndingComment(int gameStatus);
+    void showGameEndingComment(GameBoard gameBoard);
 
     void showCommentForUserAction();
 

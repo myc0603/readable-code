@@ -49,13 +49,14 @@ public class ConsoleOutputHandler implements OutputHandler {
     }
 
     @Override
-    public void showGameEndingComment(int gameStatus) {
-        if (gameStatus == 1) {
+    public void showGameEndingComment(GameBoard board) {
+        showBoard(board);
+        if (board.isWinStatus()) {
             System.out.println("지뢰를 모두 찾았습니다. GAME CLEAR!");
             return;
         }
 
-        if (gameStatus == -1) {
+        if (board.isLoseStatus()) {
             System.out.println("지뢰를 밟았습니다. GAME OVER!");
         }
     }
