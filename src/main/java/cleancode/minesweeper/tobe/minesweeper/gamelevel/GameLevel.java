@@ -1,7 +1,7 @@
 package cleancode.minesweeper.tobe.minesweeper.gamelevel;
 
 public enum GameLevel {
-    ADVANCED(20, 24, 99),
+    ADVANCED(16, 30, 99),
     MIDDLE(14, 18, 40),
     BEGINNER(8, 10, 10),
     VERY_BEGINNER(4, 5, 2);

@@ -1,11 +1,13 @@
 package cleancode.minesweeper.tobe.minesweeper.board;
 
 import cleancode.minesweeper.tobe.minesweeper.board.cell.*;
-import cleancode.minesweeper.tobe.minesweeper.gamelevel.GameLevel;
 import cleancode.minesweeper.tobe.minesweeper.board.position.CellPosition;
 import cleancode.minesweeper.tobe.minesweeper.board.position.CellPositions;
 import cleancode.minesweeper.tobe.minesweeper.board.position.RelativePosition;
+import cleancode.minesweeper.tobe.minesweeper.gamelevel.GameLevel;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
 public class GameBoard {
@@ -139,27 +141,31 @@ public class GameBoard {
     }
 
     private void openSurroundedCells(CellPosition cellPosition) {
-        if (isOpenedCell(cellPosition)) {
+        Deque<CellPosition> stack = new ArrayDeque<>();
+        stack.push(cellPosition);
+
+        while (!stack.isEmpty()) {
+            openAndPushCellAt(stack);
+        }
+    }
+
+    private void openAndPushCellAt(Deque<CellPosition> stack) {
+        CellPosition currentCellPosition = stack.pop();
+        if (isOpenedCell(currentCellPosition)) {
             return;
         }
-        if (isLandMineCellAt(cellPosition)) {
+        if (isLandMineCellAt(currentCellPosition)) {
             return;
         }
 
-        openOneCellAt(cellPosition);
+        openOneCellAt(currentCellPosition);
 
-        if (doesCellHaveLandMineCell(cellPosition)) {
+        if (doesCellHaveLandMineCell(currentCellPosition)) {
             return;
         }
 
-        List<CellPosition> surroundedPositions = calculateSurroundedPositions(cellPosition);
-        surroundedPositions.forEach(this::openSurroundedCells);
-
-        // by chnn
-//        List<CellPosition> nearbyCellPositions = cellPosition.nearbyCells();
-//        nearbyCellPositions.stream()
-//                .filter(this::isValidCellPosition) // 맨위 if 살려놓으면 이거 안해도 되긴 함
-//                .forEach(this::openSurroundedCells);
+        List<CellPosition> surroundedPositions = calculateSurroundedPositions(currentCellPosition);
+        surroundedPositions.forEach(stack::push);
     }
 
     private void openOneCellAt(CellPosition cellPosition) {
