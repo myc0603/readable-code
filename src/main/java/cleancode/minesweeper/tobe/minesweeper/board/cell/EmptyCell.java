@@ -16,7 +16,7 @@ public class EmptyCell implements Cell {
 
     @Override
     public boolean isChecked() {
-        return cellStatus != CellStatus.UNCHECKED;
+        return cellStatus == CellStatus.OPENED;
     }
 
     @Override

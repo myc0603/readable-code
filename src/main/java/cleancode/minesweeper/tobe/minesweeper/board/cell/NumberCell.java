@@ -22,7 +22,7 @@ public class NumberCell implements Cell {
 
     @Override
     public boolean isChecked() {
-        return cellStatus != CellStatus.UNCHECKED;
+        return cellStatus == CellStatus.OPENED;
     }
 
     @Override
