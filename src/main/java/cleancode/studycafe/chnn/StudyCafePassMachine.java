@@ -23,38 +23,10 @@ public class StudyCafePassMachine {
             outputHandler.askPassTypeSelection();
             StudyCafePassType studyCafePassType = inputHandler.getPassTypeSelectingUserAction();
 
-            List<StudyCafePass> passCandidates = getPassCandidates(studyCafePassType);
-            outputHandler.showPassListForSelection(passCandidates);
-            StudyCafePass selectedPass = inputHandler.getSelectPass(passCandidates);
+            StudyCafePass studyCafePass = getStudyCafePass(studyCafePassType);
+            StudyCafeLockerPass lockerPass = getStudyCafeLockerPass(studyCafePassType, studyCafePass);
+            outputHandler.showPassOrderSummary(studyCafePass, lockerPass);
 
-            if (studyCafePassType == StudyCafePassType.HOURLY) {
-                outputHandler.showPassOrderSummary(selectedPass, null);
-            } else if (studyCafePassType == StudyCafePassType.WEEKLY) {
-                outputHandler.showPassOrderSummary(selectedPass, null);
-            } else if (studyCafePassType == StudyCafePassType.FIXED) {
-
-                StudyCafeFileHandler studyCafeFileHandler = new StudyCafeFileHandler();
-                List<StudyCafeLockerPass> lockerPasses = studyCafeFileHandler.readLockerPasses();
-                StudyCafeLockerPass lockerPass = lockerPasses.stream()
-                    .filter(option ->
-                        option.getPassType() == selectedPass.getPassType()
-                            && option.getDuration() == selectedPass.getDuration()
-                    )
-                    .findFirst()
-                    .orElse(null); // null 에 해당하는 lockerPass 객체도 만들면 좋을 듯 -> StudyCafeLockerPass 상수로 UNCHECKED_LOCKER_PASS 만들어서 사용
-
-                boolean lockerSelection = false;
-                if (lockerPass != null) {
-                    outputHandler.askLockerPass(lockerPass);
-                    lockerSelection = inputHandler.getLockerSelection();
-                }
-
-                if (lockerSelection) {
-                    outputHandler.showPassOrderSummary(selectedPass, lockerPass);
-                } else {
-                    outputHandler.showPassOrderSummary(selectedPass, null);
-                }
-            }
         } catch (AppException e) {
             outputHandler.showSimpleMessage(e.getMessage());
         } catch (Exception e) {
@@ -62,12 +34,49 @@ public class StudyCafePassMachine {
         }
     }
 
-    private static List<StudyCafePass> getPassCandidates(StudyCafePassType passType) {
+    private StudyCafePass getStudyCafePass(StudyCafePassType passType) {
+        List<StudyCafePass> passCandidates = getStudyCafePassCandidates(passType);
+        outputHandler.showPassListForSelection(passCandidates);
+        return inputHandler.getSelectPass(passCandidates);
+    }
+
+    private StudyCafeLockerPass getStudyCafeLockerPass(StudyCafePassType passType, StudyCafePass studyCafePass) {
+        StudyCafeLockerPass lockerPass = null;
+        if (passType == StudyCafePassType.FIXED) {
+            lockerPass = getLockerPassForFixedType(studyCafePass);
+        }
+        return lockerPass;
+    }
+
+    private static List<StudyCafePass> getStudyCafePassCandidates(StudyCafePassType passType) {
         StudyCafeFileHandler studyCafeFileHandler = new StudyCafeFileHandler();
         List<StudyCafePass> studyCafePasses = studyCafeFileHandler.readStudyCafePasses();
         return studyCafePasses.stream()
-            .filter(studyCafePass -> studyCafePass.getPassType() == passType)
-            .toList();
+                .filter(studyCafePass -> studyCafePass.getPassType() == passType)
+                .toList();
+    }
+
+    private StudyCafeLockerPass getLockerPassForFixedType(StudyCafePass studyCafePass) {
+        StudyCafeFileHandler studyCafeFileHandler = new StudyCafeFileHandler();
+        List<StudyCafeLockerPass> lockerPasses = studyCafeFileHandler.readLockerPasses();
+        StudyCafeLockerPass lockerPass = lockerPasses.stream()
+            .filter(option ->
+                option.getPassType() == studyCafePass.getPassType()
+                    && option.getDuration() == studyCafePass.getDuration()
+            )
+            .findFirst()
+            .orElse(null); // null 에 해당하는 lockerPass 객체도 만들면 좋을 듯 -> StudyCafeLockerPass 상수로 UNCHECKED_LOCKER_PASS 만들어서 사용
+
+        boolean lockerSelection = false;
+        if (lockerPass != null) {
+            outputHandler.askLockerPass(lockerPass);
+            lockerSelection = inputHandler.getLockerSelection();
+        }
+
+        if (!lockerSelection) {
+            lockerPass = null;
+        }
+        return lockerPass;
     }
 
 }
