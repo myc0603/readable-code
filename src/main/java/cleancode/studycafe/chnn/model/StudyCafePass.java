@@ -18,6 +18,10 @@ public class StudyCafePass implements Pass {
         return new StudyCafePass(passType, duration, price, discountRate);
     }
 
+    public boolean isSameType(StudyCafePassType passType) {
+        return this.passType == passType;
+    }
+
     @Override
     public StudyCafePassType getPassType() {
         return passType;
@@ -35,5 +39,9 @@ public class StudyCafePass implements Pass {
 
     public int getDiscountPrice() {
         return (int) (price * discountRate);
+    }
+
+    public int getCalculatedPrice() {
+        return price - getDiscountPrice();
     }
 }
