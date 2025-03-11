@@ -31,7 +31,7 @@ public class PassGetter {
     public LockerPass getStudyCafeLockerPass(StudyCafePass studyCafePass) {
         LockerPass lockerPassCandidate = enrolledLockerPasses.getLockerPassCandidate(studyCafePass);
         if (userDoesNotSelect(lockerPassCandidate)) {
-            return null;
+            return LockerPass.UNSELECTED_LOCKER_PASS;
         }
         return lockerPassCandidate;
     }
@@ -50,6 +50,6 @@ public class PassGetter {
     }
 
     private boolean exist(LockerPass lockerPassCandidate) {
-        return lockerPassCandidate != null;
+        return lockerPassCandidate != LockerPass.UNSELECTED_LOCKER_PASS;
     }
 }

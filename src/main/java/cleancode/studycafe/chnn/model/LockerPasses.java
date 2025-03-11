@@ -7,24 +7,24 @@ import java.util.List;
 public class LockerPasses {
 
     private final StudyCafeFileHandler studyCafeFileHandler;
-    private List<LockerPass> lockerPasses;
+    private List<LockerPass> enrolledLockerPasses;
 
     public LockerPasses(StudyCafeFileHandler studyCafeFileHandler) {
         this.studyCafeFileHandler = studyCafeFileHandler;
-        lockerPasses = studyCafeFileHandler.readLockerPasses();
+        enrolledLockerPasses = studyCafeFileHandler.readLockerPasses();
     }
 
     public void updatePassesFromFile() {
-        lockerPasses = studyCafeFileHandler.readLockerPasses();
+        enrolledLockerPasses = studyCafeFileHandler.readLockerPasses();
     }
 
     public LockerPass getLockerPassCandidate(StudyCafePass studyCafePass) {
-        return lockerPasses.stream()
+        return enrolledLockerPasses.stream()
                 .filter(option ->
                         option.getPassType() == studyCafePass.getPassType()
                                 && option.getDuration() == studyCafePass.getDuration()
                 )
                 .findFirst()
-                .orElse(null);
+                .orElse(LockerPass.UNSELECTED_LOCKER_PASS);
     }
 }

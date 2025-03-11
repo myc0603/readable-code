@@ -11,7 +11,7 @@ public class TotalPasses {
     }
 
     public int getTotalPrice() {
-        return studyCafePass.getPrice() - getDiscountPrice() + (lockerPass != null ? lockerPass.getPrice() : 0);
+        return studyCafePass.getCalculatedPrice() + lockerPass.getPrice();
     }
 
     public int getDiscountPrice() {

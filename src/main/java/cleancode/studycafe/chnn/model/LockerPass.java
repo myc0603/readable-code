@@ -2,6 +2,8 @@ package cleancode.studycafe.chnn.model;
 
 public class LockerPass implements Pass {
 
+    public static final LockerPass UNSELECTED_LOCKER_PASS = of(null, 0, 0);
+
     private final StudyCafePassType passType;
     private final int duration;
     private final int price;
