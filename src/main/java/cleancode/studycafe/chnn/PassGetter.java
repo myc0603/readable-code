@@ -12,7 +12,7 @@ public class PassGetter {
     private static final StudyCafeFileHandler STUDY_CAFE_FILE_HANDLER = new StudyCafeFileHandler();
 
     private final StudyCafePasses enrolledStudyCafePasses = new StudyCafePasses(STUDY_CAFE_FILE_HANDLER);
-    private final StudyCafeLockerPasses enrolledLockerPasses = new StudyCafeLockerPasses(STUDY_CAFE_FILE_HANDLER);
+    private final LockerPasses enrolledLockerPasses = new LockerPasses(STUDY_CAFE_FILE_HANDLER);
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
 
@@ -28,8 +28,8 @@ public class PassGetter {
         return inputHandler.getSelectPass(passCandidates);
     }
 
-    public StudyCafeLockerPass getStudyCafeLockerPass(StudyCafePass studyCafePass) {
-        StudyCafeLockerPass lockerPassCandidate = enrolledLockerPasses.getLockerPassCandidate(studyCafePass);
+    public LockerPass getStudyCafeLockerPass(StudyCafePass studyCafePass) {
+        LockerPass lockerPassCandidate = enrolledLockerPasses.getLockerPassCandidate(studyCafePass);
         if (userDoesNotSelect(lockerPassCandidate)) {
             return null;
         }
@@ -41,7 +41,7 @@ public class PassGetter {
         return inputHandler.getPassTypeSelectingUserAction();
     }
 
-    private boolean userDoesNotSelect(StudyCafeLockerPass lockerPassCandidate) {
+    private boolean userDoesNotSelect(LockerPass lockerPassCandidate) {
         if (exist(lockerPassCandidate)) {
             outputHandler.askLockerPass(lockerPassCandidate);
             return !inputHandler.getLockerSelection();
@@ -49,7 +49,7 @@ public class PassGetter {
         return false;
     }
 
-    private boolean exist(StudyCafeLockerPass lockerPassCandidate) {
+    private boolean exist(LockerPass lockerPassCandidate) {
         return lockerPassCandidate != null;
     }
 }

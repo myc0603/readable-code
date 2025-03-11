@@ -1,6 +1,6 @@
 package cleancode.studycafe.chnn.io;
 
-import cleancode.studycafe.chnn.model.StudyCafeLockerPass;
+import cleancode.studycafe.chnn.model.LockerPass;
 import cleancode.studycafe.chnn.model.StudyCafePass;
 
 import java.util.List;
@@ -31,7 +31,7 @@ public class OutputHandler {
         }
     }
 
-    public void askLockerPass(StudyCafeLockerPass lockerPass) {
+    public void askLockerPass(LockerPass lockerPass) {
         System.out.println();
         String askMessage = String.format(
             "사물함을 이용하시겠습니까? (%s)",
@@ -42,7 +42,7 @@ public class OutputHandler {
         System.out.println("1. 예 | 2. 아니오");
     }
 
-    public void showPassOrderSummary(StudyCafePass selectedPass, StudyCafeLockerPass lockerPass) {
+    public void showPassOrderSummary(StudyCafePass selectedPass, LockerPass lockerPass) {
         System.out.println();
         System.out.println("이용 내역");
         System.out.println("이용권: " + Displayer.display(selectedPass));

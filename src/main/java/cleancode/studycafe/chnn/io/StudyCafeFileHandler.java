@@ -1,6 +1,6 @@
 package cleancode.studycafe.chnn.io;
 
-import cleancode.studycafe.chnn.model.StudyCafeLockerPass;
+import cleancode.studycafe.chnn.model.LockerPass;
 import cleancode.studycafe.chnn.model.StudyCafePass;
 import cleancode.studycafe.chnn.model.StudyCafePassType;
 
@@ -33,17 +33,17 @@ public class StudyCafeFileHandler {
         }
     }
 
-    public List<StudyCafeLockerPass> readLockerPasses() {
+    public List<LockerPass> readLockerPasses() {
         try {
             List<String> lines = Files.readAllLines(Paths.get("src/main/resources/cleancode/studycafe/locker.csv"));
-            List<StudyCafeLockerPass> lockerPasses = new ArrayList<>();
+            List<LockerPass> lockerPasses = new ArrayList<>();
             for (String line : lines) {
                 String[] values = line.split(",");
                 StudyCafePassType studyCafePassType = StudyCafePassType.valueOf(values[0]);
                 int duration = Integer.parseInt(values[1]);
                 int price = Integer.parseInt(values[2]);
 
-                StudyCafeLockerPass lockerPass = StudyCafeLockerPass.of(studyCafePassType, duration, price);
+                LockerPass lockerPass = LockerPass.of(studyCafePassType, duration, price);
                 lockerPasses.add(lockerPass);
             }
 

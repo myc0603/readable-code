@@ -1,19 +1,19 @@
 package cleancode.studycafe.chnn.model;
 
-public class StudyCafeLockerPass implements Pass {
+public class LockerPass implements Pass {
 
     private final StudyCafePassType passType;
     private final int duration;
     private final int price;
 
-    private StudyCafeLockerPass(StudyCafePassType passType, int duration, int price) {
+    private LockerPass(StudyCafePassType passType, int duration, int price) {
         this.passType = passType;
         this.duration = duration;
         this.price = price;
     }
 
-    public static StudyCafeLockerPass of(StudyCafePassType passType, int duration, int price) {
-        return new StudyCafeLockerPass(passType, duration, price);
+    public static LockerPass of(StudyCafePassType passType, int duration, int price) {
+        return new LockerPass(passType, duration, price);
     }
 
     @Override

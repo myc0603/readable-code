@@ -3,7 +3,7 @@ package cleancode.studycafe.chnn;
 import cleancode.studycafe.chnn.exception.AppException;
 import cleancode.studycafe.chnn.io.InputHandler;
 import cleancode.studycafe.chnn.io.OutputHandler;
-import cleancode.studycafe.chnn.model.StudyCafeLockerPass;
+import cleancode.studycafe.chnn.model.LockerPass;
 import cleancode.studycafe.chnn.model.StudyCafePass;
 
 public class StudyCafePassMachine {
@@ -18,7 +18,7 @@ public class StudyCafePassMachine {
             outputHandler.showAnnouncement();
 
             StudyCafePass studyCafePass = passGetter.getStudyCafePass();
-            StudyCafeLockerPass lockerPass = passGetter.getStudyCafeLockerPass(studyCafePass);
+            LockerPass lockerPass = passGetter.getStudyCafeLockerPass(studyCafePass);
 
             outputHandler.showPassOrderSummary(studyCafePass, lockerPass);
 

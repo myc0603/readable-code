@@ -4,12 +4,12 @@ import cleancode.studycafe.chnn.io.StudyCafeFileHandler;
 
 import java.util.List;
 
-public class StudyCafeLockerPasses {
+public class LockerPasses {
 
     private final StudyCafeFileHandler studyCafeFileHandler;
-    private List<StudyCafeLockerPass> lockerPasses;
+    private List<LockerPass> lockerPasses;
 
-    public StudyCafeLockerPasses(StudyCafeFileHandler studyCafeFileHandler) {
+    public LockerPasses(StudyCafeFileHandler studyCafeFileHandler) {
         this.studyCafeFileHandler = studyCafeFileHandler;
         lockerPasses = studyCafeFileHandler.readLockerPasses();
     }
@@ -18,7 +18,7 @@ public class StudyCafeLockerPasses {
         lockerPasses = studyCafeFileHandler.readLockerPasses();
     }
 
-    public StudyCafeLockerPass getLockerPassCandidate(StudyCafePass studyCafePass) {
+    public LockerPass getLockerPassCandidate(StudyCafePass studyCafePass) {
         return lockerPasses.stream()
                 .filter(option ->
                         option.getPassType() == studyCafePass.getPassType()
