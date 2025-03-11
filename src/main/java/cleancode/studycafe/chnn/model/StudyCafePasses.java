@@ -2,7 +2,6 @@ package cleancode.studycafe.chnn.model;
 
 import cleancode.studycafe.chnn.io.StudyCafeFileHandler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudyCafePasses {
@@ -19,7 +18,9 @@ public class StudyCafePasses {
         studyCafePasses = studyCafeFileHandler.readStudyCafePasses();
     }
 
-    public List<StudyCafePass> getPasses() {
-        return new ArrayList<>(studyCafePasses);
+    public List<StudyCafePass> getStudyCafePassCandidates(StudyCafePassType passType) {
+        return studyCafePasses.stream()
+                .filter(studyCafePass -> studyCafePass.getPassType() == passType)
+                .toList();
     }
 }

@@ -2,7 +2,6 @@ package cleancode.studycafe.chnn.model;
 
 import cleancode.studycafe.chnn.io.StudyCafeFileHandler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudyCafeLockerPasses {
@@ -19,7 +18,13 @@ public class StudyCafeLockerPasses {
         lockerPasses = studyCafeFileHandler.readLockerPasses();
     }
 
-    public List<StudyCafeLockerPass> getPasses() {
-        return new ArrayList<>(lockerPasses);
+    public StudyCafeLockerPass getLockerPassCandidate(StudyCafePass studyCafePass) {
+        return lockerPasses.stream()
+                .filter(option ->
+                        option.getPassType() == studyCafePass.getPassType()
+                                && option.getDuration() == studyCafePass.getDuration()
+                )
+                .findFirst()
+                .orElse(null);
     }
 }
