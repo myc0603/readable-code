@@ -27,7 +27,7 @@ public class TotalPasses {
     }
 
     public boolean hasLockerPass() {
-        return lockerPass != null;
+        return lockerPass != LockerPass.UNSELECTED_LOCKER_PASS;
     }
 
 }

@@ -20,11 +20,8 @@ public class LockerPasses {
 
     public LockerPass getLockerPassCandidate(StudyCafePass studyCafePass) {
         return enrolledLockerPasses.stream()
-                .filter(option ->
-                        option.getPassType() == studyCafePass.getPassType()
-                                && option.getDuration() == studyCafePass.getDuration()
-                )
-                .findFirst()
+                .filter(studyCafePass::isCorrespondingPass)
+                .findAny()
                 .orElse(LockerPass.UNSELECTED_LOCKER_PASS);
     }
 }
