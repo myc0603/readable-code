@@ -3,9 +3,7 @@ package cleancode.studycafe.chnn;
 import cleancode.studycafe.chnn.io.InputHandler;
 import cleancode.studycafe.chnn.io.OutputHandler;
 import cleancode.studycafe.chnn.io.StudyCafeFileHandler;
-import cleancode.studycafe.chnn.model.StudyCafeLockerPass;
-import cleancode.studycafe.chnn.model.StudyCafePass;
-import cleancode.studycafe.chnn.model.StudyCafePassType;
+import cleancode.studycafe.chnn.model.*;
 
 import java.util.List;
 
@@ -13,6 +11,8 @@ public class PassGetter {
 
     private static final StudyCafeFileHandler STUDY_CAFE_FILE_HANDLER = new StudyCafeFileHandler();
 
+    private final StudyCafePasses enrolledStudyCafePasses = new StudyCafePasses(STUDY_CAFE_FILE_HANDLER);
+    private final StudyCafeLockerPasses enrolledLockerPasses = new StudyCafeLockerPasses(STUDY_CAFE_FILE_HANDLER);
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
 
@@ -41,15 +41,15 @@ public class PassGetter {
         return inputHandler.getPassTypeSelectingUserAction();
     }
 
-    private static List<StudyCafePass> getStudyCafePassCandidates(StudyCafePassType passType) {
-        List<StudyCafePass> studyCafePasses = STUDY_CAFE_FILE_HANDLER.readStudyCafePasses();
+    private List<StudyCafePass> getStudyCafePassCandidates(StudyCafePassType passType) {
+        List<StudyCafePass> studyCafePasses = enrolledStudyCafePasses.getPasses();
         return studyCafePasses.stream()
                 .filter(studyCafePass -> studyCafePass.getPassType() == passType)
                 .toList();
     }
 
-    private static StudyCafeLockerPass getLockerPassCandidate(StudyCafePass studyCafePass) {
-        List<StudyCafeLockerPass> lockerPasses = STUDY_CAFE_FILE_HANDLER.readLockerPasses();
+    private StudyCafeLockerPass getLockerPassCandidate(StudyCafePass studyCafePass) {
+        List<StudyCafeLockerPass> lockerPasses = enrolledLockerPasses.getPasses();
         return lockerPasses.stream()
                 .filter(option ->
                         option.getPassType() == studyCafePass.getPassType()
