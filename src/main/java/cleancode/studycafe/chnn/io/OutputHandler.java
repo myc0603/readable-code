@@ -27,7 +27,7 @@ public class OutputHandler {
         System.out.println("이용권 목록");
         for (int index = 0; index < passes.size(); index++) {
             StudyCafePass pass = passes.get(index);
-            System.out.println(String.format("%s. ", index + 1) + pass.display());
+            System.out.println(String.format("%s. ", index + 1) + Displayer.display(pass));
         }
     }
 
@@ -35,20 +35,19 @@ public class OutputHandler {
         System.out.println();
         String askMessage = String.format(
             "사물함을 이용하시겠습니까? (%s)",
-            lockerPass.display()
+            Displayer.display(lockerPass)
         );
 
         System.out.println(askMessage);
         System.out.println("1. 예 | 2. 아니오");
     }
 
-    // 할인금액 정하는 건 다른 곳에서 참고로 사물함은 할인에 포함 안됨
     public void showPassOrderSummary(StudyCafePass selectedPass, StudyCafeLockerPass lockerPass) {
         System.out.println();
         System.out.println("이용 내역");
-        System.out.println("이용권: " + selectedPass.display());
+        System.out.println("이용권: " + Displayer.display(selectedPass));
         if (lockerPass != null) {
-            System.out.println("사물함: " + lockerPass.display());
+            System.out.println("사물함: " + Displayer.display(selectedPass));
         }
 
         double discountRate = selectedPass.getDiscountRate();

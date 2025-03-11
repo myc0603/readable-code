@@ -1,6 +1,6 @@
 package cleancode.studycafe.chnn.model;
 
-public class StudyCafePass {
+public class StudyCafePass implements Pass {
 
     private final StudyCafePassType passType;
     private final int duration;
@@ -18,14 +18,17 @@ public class StudyCafePass {
         return new StudyCafePass(passType, duration, price, discountRate);
     }
 
+    @Override
     public StudyCafePassType getPassType() {
         return passType;
     }
 
+    @Override
     public int getDuration() {
         return duration;
     }
 
+    @Override
     public int getPrice() {
         return price;
     }
@@ -33,19 +36,4 @@ public class StudyCafePass {
     public double getDiscountRate() {
         return discountRate;
     }
-
-    // outputHandler 에게 책임을 넘기면 좋을듯
-    public String display() {
-        if (passType == StudyCafePassType.HOURLY) {
-            return String.format("%s시간권 - %d원", duration, price);
-        }
-        if (passType == StudyCafePassType.WEEKLY) {
-            return String.format("%s주권 - %d원", duration, price);
-        }
-        if (passType == StudyCafePassType.FIXED) {
-            return String.format("%s주권 - %d원", duration, price);
-        }
-        return "";
-    }
-
 }

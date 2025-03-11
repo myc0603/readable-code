@@ -1,6 +1,6 @@
 package cleancode.studycafe.chnn.model;
 
-public class StudyCafeLockerPass {
+public class StudyCafeLockerPass implements Pass {
 
     private final StudyCafePassType passType;
     private final int duration;
@@ -16,14 +16,17 @@ public class StudyCafeLockerPass {
         return new StudyCafeLockerPass(passType, duration, price);
     }
 
+    @Override
     public StudyCafePassType getPassType() {
         return passType;
     }
 
+    @Override
     public int getDuration() {
         return duration;
     }
 
+    @Override
     public int getPrice() {
         return price;
     }
