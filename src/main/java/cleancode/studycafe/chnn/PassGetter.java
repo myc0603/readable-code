@@ -1,5 +1,6 @@
 package cleancode.studycafe.chnn;
 
+import cleancode.studycafe.asis.exception.AppException;
 import cleancode.studycafe.chnn.io.InputHandler;
 import cleancode.studycafe.chnn.io.OutputHandler;
 import cleancode.studycafe.chnn.io.StudyCafeFileHandler;
@@ -36,9 +37,19 @@ public class PassGetter {
         return lockerPassCandidate;
     }
 
+    // todo fail to fix...
     private StudyCafePassType getStudyCafePassType() {
-        outputHandler.askPassTypeSelection();
-        return inputHandler.getPassTypeSelectingUserAction();
+        StudyCafePassType passTypeSelectingUserAction;
+        while (true) {
+            try {
+                outputHandler.askPassTypeSelection();
+                passTypeSelectingUserAction = inputHandler.getPassTypeSelectingUserAction();
+                break;
+            } catch (AppException e) {
+                outputHandler.showSimpleMessage(e.getMessage());
+            }
+        }
+        return passTypeSelectingUserAction;
     }
 
     private boolean userDoesNotSelect(LockerPass lockerPassCandidate) {
