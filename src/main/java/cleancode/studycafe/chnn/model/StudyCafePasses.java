@@ -15,7 +15,7 @@ public class StudyCafePasses {
         studyCafePasses = studyCafeFileHandler.readStudyCafePasses();
     }
 
-    public void fetchFromFile() {
+    public void updatePassesFromFile() {
         studyCafePasses = studyCafeFileHandler.readStudyCafePasses();
     }
 

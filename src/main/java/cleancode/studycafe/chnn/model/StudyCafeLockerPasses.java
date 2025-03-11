@@ -15,7 +15,7 @@ public class StudyCafeLockerPasses {
         lockerPasses = studyCafeFileHandler.readLockerPasses();
     }
 
-    public void fetchFromFile() {
+    public void updatePassesFromFile() {
         lockerPasses = studyCafeFileHandler.readLockerPasses();
     }
 
