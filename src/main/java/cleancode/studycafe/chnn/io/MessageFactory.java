@@ -12,15 +12,15 @@ public class MessageFactory {
     private MessageFactory() {
     }
 
-    public static String display(Pass pass) {
+    public static String displayPass(Pass pass) {
         String format = isPassHourly(pass) ? displayFormatForHourly : displayFormatForWeekly;
         return String.format(format, pass.getDuration(), pass.getPrice());
     }
 
     public static String displayTotalPasses(TotalPasses totalPasses) {
-        String output = "이용권: " + MessageFactory.display(totalPasses.getStudyCafePass());
+        String output = "이용권: " + MessageFactory.displayPass(totalPasses.getStudyCafePass());
         if (totalPasses.hasLockerPass()) {
-            output += "\n사물함: " + MessageFactory.display(totalPasses.getLockerPass());
+            output += "\n사물함: " + MessageFactory.displayPass(totalPasses.getLockerPass());
         }
         return output;
     }

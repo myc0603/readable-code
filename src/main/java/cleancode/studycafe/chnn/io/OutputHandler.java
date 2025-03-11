@@ -28,7 +28,7 @@ public class OutputHandler {
         System.out.println("이용권 목록");
         for (int index = 0; index < passes.size(); index++) {
             StudyCafePass pass = passes.get(index);
-            System.out.println(String.format("%s. ", index + 1) + MessageFactory.display(pass));
+            System.out.println(String.format("%s. ", index + 1) + MessageFactory.displayPass(pass));
         }
     }
 
@@ -36,7 +36,7 @@ public class OutputHandler {
         System.out.println();
         String askMessage = String.format(
             "사물함을 이용하시겠습니까? (%s)",
-            MessageFactory.display(lockerPass)
+            MessageFactory.displayPass(lockerPass)
         );
 
         System.out.println(askMessage);
