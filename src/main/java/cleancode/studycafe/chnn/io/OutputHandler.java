@@ -42,6 +42,7 @@ public class OutputHandler {
         System.out.println("1. 예 | 2. 아니오");
     }
 
+    // 할인금액 정하는 건 다른 곳에서 참고로 사물함은 할인에 포함 안됨
     public void showPassOrderSummary(StudyCafePass selectedPass, StudyCafeLockerPass lockerPass) {
         System.out.println();
         System.out.println("이용 내역");

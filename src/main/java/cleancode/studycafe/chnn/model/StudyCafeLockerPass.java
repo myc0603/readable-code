@@ -28,6 +28,7 @@ public class StudyCafeLockerPass {
         return price;
     }
 
+    // outputHandler 에게 책임을 넘기면 좋을듯
     public String display() {
         if (passType == StudyCafePassType.HOURLY) {
             return String.format("%s시간권 - %d원", duration, price);
