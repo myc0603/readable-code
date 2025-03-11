@@ -5,6 +5,7 @@ import cleancode.studycafe.chnn.io.InputHandler;
 import cleancode.studycafe.chnn.io.OutputHandler;
 import cleancode.studycafe.chnn.model.LockerPass;
 import cleancode.studycafe.chnn.model.StudyCafePass;
+import cleancode.studycafe.chnn.model.TotalPasses;
 
 public class StudyCafePassMachine {
 
@@ -20,7 +21,7 @@ public class StudyCafePassMachine {
             StudyCafePass studyCafePass = passGetter.getStudyCafePass();
             LockerPass lockerPass = passGetter.getStudyCafeLockerPass(studyCafePass);
 
-            outputHandler.showPassOrderSummary(studyCafePass, lockerPass);
+            outputHandler.showPassOrderSummary(new TotalPasses(studyCafePass, lockerPass));
 
         } catch (AppException e) {
             outputHandler.showSimpleMessage(e.getMessage());

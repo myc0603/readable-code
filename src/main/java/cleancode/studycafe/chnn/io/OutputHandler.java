@@ -2,6 +2,7 @@ package cleancode.studycafe.chnn.io;
 
 import cleancode.studycafe.chnn.model.LockerPass;
 import cleancode.studycafe.chnn.model.StudyCafePass;
+import cleancode.studycafe.chnn.model.TotalPasses;
 
 import java.util.List;
 
@@ -42,21 +43,17 @@ public class OutputHandler {
         System.out.println("1. 예 | 2. 아니오");
     }
 
-    public void showPassOrderSummary(StudyCafePass selectedPass, LockerPass lockerPass) {
+    public void showPassOrderSummary(TotalPasses totalPasses) {
         System.out.println();
         System.out.println("이용 내역");
-        System.out.println("이용권: " + Displayer.display(selectedPass));
-        if (lockerPass != null) {
-            System.out.println("사물함: " + Displayer.display(selectedPass));
-        }
+        System.out.println(Displayer.displayTotalPasses(totalPasses));
 
-        double discountRate = selectedPass.getDiscountRate();
-        int discountPrice = (int) (selectedPass.getPrice() * discountRate);
+        int discountPrice = totalPasses.getDiscountPrice();
         if (discountPrice > 0) {
             System.out.println("이벤트 할인 금액: " + discountPrice + "원");
         }
 
-        int totalPrice = selectedPass.getPrice() - discountPrice + (lockerPass != null ? lockerPass.getPrice() : 0);
+        int totalPrice = totalPasses.getTotalPrice();
         System.out.println("총 결제 금액: " + totalPrice + "원");
         System.out.println();
     }

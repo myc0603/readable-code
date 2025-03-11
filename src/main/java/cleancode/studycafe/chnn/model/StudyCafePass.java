@@ -33,7 +33,7 @@ public class StudyCafePass implements Pass {
         return price;
     }
 
-    public double getDiscountRate() {
-        return discountRate;
+    public int getDiscountPrice() {
+        return (int) (price * discountRate);
     }
 }
