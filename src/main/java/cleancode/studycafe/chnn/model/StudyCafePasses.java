@@ -7,20 +7,20 @@ import java.util.List;
 public class StudyCafePasses {
 
     private final StudyCafeFileHandler studyCafeFileHandler;
-    private List<StudyCafePass> studyCafePasses;
+    private List<StudyCafePass> enrolledStudyCafePasses;
 
     public StudyCafePasses(StudyCafeFileHandler studyCafeFileHandler) {
         this.studyCafeFileHandler = studyCafeFileHandler;
-        studyCafePasses = studyCafeFileHandler.readStudyCafePasses();
+        enrolledStudyCafePasses = studyCafeFileHandler.readStudyCafePasses();
     }
 
     public void updatePassesFromFile() {
-        studyCafePasses = studyCafeFileHandler.readStudyCafePasses();
+        enrolledStudyCafePasses = studyCafeFileHandler.readStudyCafePasses();
     }
 
     public List<StudyCafePass> getStudyCafePassCandidates(StudyCafePassType passType) {
-        return studyCafePasses.stream()
-                .filter(studyCafePass -> studyCafePass.getPassType() == passType)
+        return enrolledStudyCafePasses.stream()
+                .filter(studyCafePass -> studyCafePass.isSameType(passType))
                 .toList();
     }
 }
