@@ -4,12 +4,12 @@ import cleancode.studycafe.chnn.model.Pass;
 import cleancode.studycafe.chnn.model.StudyCafePassType;
 import cleancode.studycafe.chnn.model.TotalPasses;
 
-public class Displayer {
+public class MessageFactory {
 
     private static final String displayFormatForHourly = "%s시간권 - %d원";
     private static final String displayFormatForWeekly = "%s주권 - %d원";
 
-    private Displayer() {
+    private MessageFactory() {
     }
 
     public static String display(Pass pass) {
@@ -18,9 +18,9 @@ public class Displayer {
     }
 
     public static String displayTotalPasses(TotalPasses totalPasses) {
-        String output = "이용권: " + Displayer.display(totalPasses.getStudyCafePass());
+        String output = "이용권: " + MessageFactory.display(totalPasses.getStudyCafePass());
         if (totalPasses.hasLockerPass()) {
-            output += "\n사물함: " + Displayer.display(totalPasses.getLockerPass());
+            output += "\n사물함: " + MessageFactory.display(totalPasses.getLockerPass());
         }
         return output;
     }
