@@ -64,7 +64,7 @@ public class OutputHandler {
         }
 
         int totalPrice = passOrder.getTotalPrice();
-`        System.out.println("총 결제 금액: " + totalPrice + "원");
+        System.out.println("총 결제 금액: " + totalPrice + "원");
         System.out.println();
     }
 
