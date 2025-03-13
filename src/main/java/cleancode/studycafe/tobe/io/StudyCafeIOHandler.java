@@ -9,13 +9,8 @@ import java.util.List;
 
 public class StudyCafeIOHandler {
 
-    private final InputHandler inputHandler;
-    private final OutputHandler outputHandler;
-
-    public StudyCafeIOHandler(InputHandler inputHandler, OutputHandler outputHandler) {
-        this.inputHandler = inputHandler;
-        this.outputHandler = outputHandler;
-    }
+    private final InputHandler inputHandler = new InputHandler();
+    private final OutputHandler outputHandler = new OutputHandler();
 
     public void showStartMessage() {
         outputHandler.showWelcomeMessage();

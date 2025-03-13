@@ -1,25 +1,26 @@
 package cleancode.studycafe.tobe;
 
 import cleancode.studycafe.tobe.exception.AppException;
-import cleancode.studycafe.tobe.io.InputHandler;
-import cleancode.studycafe.tobe.io.OutputHandler;
-import cleancode.studycafe.tobe.io.StudyCafeFileHandler;
 import cleancode.studycafe.tobe.io.StudyCafeIOHandler;
 import cleancode.studycafe.tobe.model.order.StudyCafePassOrder;
 import cleancode.studycafe.tobe.model.pass.*;
 import cleancode.studycafe.tobe.model.pass.locker.StudyCafeLockerPass;
 import cleancode.studycafe.tobe.model.pass.locker.StudyCafeLockerPasses;
+import cleancode.studycafe.tobe.provider.LockerPassProvider;
+import cleancode.studycafe.tobe.provider.SeatPassProvider;
 
 import java.util.List;
 import java.util.Optional;
 
 public class StudyCafePassMachine {
 
-    private final StudyCafeFileHandler studyCafeFileHandler = new StudyCafeFileHandler();
-    private final StudyCafeIOHandler ioHandler;
+    private final SeatPassProvider seatPassProvider;
+    private final LockerPassProvider lockerPassProvider;
+    private final StudyCafeIOHandler ioHandler = new StudyCafeIOHandler();
 
-    public StudyCafePassMachine(InputHandler inputHandler, OutputHandler outputHandler) {
-        this.ioHandler = new StudyCafeIOHandler(inputHandler, outputHandler);
+    public StudyCafePassMachine(SeatPassProvider seatPassProvider, LockerPassProvider lockerPassProvider) {
+        this.seatPassProvider = seatPassProvider;
+        this.lockerPassProvider = lockerPassProvider;
     }
 
     public void run() {
@@ -46,7 +47,7 @@ public class StudyCafePassMachine {
     }
 
     private List<StudyCafeSeatPass> findPassCandidatesBy(StudyCafePassType studyCafePassType) {
-        StudyCafeSeatPasses allPasses = studyCafeFileHandler.readStudyCafePasses();
+        StudyCafeSeatPasses allPasses = seatPassProvider.getSeatPasses();
 
         return allPasses.findPassesBy(studyCafePassType);
     }
@@ -70,7 +71,7 @@ public class StudyCafePassMachine {
     }
 
     private Optional<StudyCafeLockerPass> findLockerPassCandidateBy(StudyCafeSeatPass pass) {
-        StudyCafeLockerPasses allLockerPasses = studyCafeFileHandler.readLockerPasses();
+        StudyCafeLockerPasses allLockerPasses = lockerPassProvider.getLockerPasses();
 
         return allLockerPasses.findLockerPassBy(pass);
     }
