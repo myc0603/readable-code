@@ -1,6 +1,6 @@
 package cleancode.studycafe.chnn;
 
-import cleancode.studycafe.asis.exception.AppException;
+import cleancode.studycafe.chnn.exception.AppException;
 import cleancode.studycafe.chnn.io.InputHandler;
 import cleancode.studycafe.chnn.io.OutputHandler;
 import cleancode.studycafe.chnn.io.StudyCafeFileHandler;
@@ -37,7 +37,6 @@ public class PassGetter {
         return lockerPassCandidate;
     }
 
-    // todo fail to fix...
     private StudyCafePassType getStudyCafePassType() {
         StudyCafePassType passTypeSelectingUserAction;
         while (true) {
